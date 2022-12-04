@@ -1,0 +1,14 @@
+MANIFEST.in
+README.md
+VERSION
+requirements.txt
+setup.py
+HelloBot/__init__.py
+HelloBot/__main__.py
+HelloBot/bot.py
+HelloBot.egg-info/PKG-INFO
+HelloBot.egg-info/SOURCES.txt
+HelloBot.egg-info/dependency_links.txt
+HelloBot.egg-info/requires.txt
+HelloBot.egg-info/top_level.txt
+HelloBot/resources/start.png
