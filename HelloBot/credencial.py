@@ -1,4 +1,0 @@
-
-senha = 'Butterfly#03'
-    
-
