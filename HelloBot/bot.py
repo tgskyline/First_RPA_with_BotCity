@@ -29,24 +29,7 @@ from botcity.core import DesktopBot
 
 class Bot(DesktopBot):
     def action(self, execution=None):
-        # Uncomment to silence Maestro errors when disconnected
-        # if self.maestro:
-        #     self.maestro.RAISE_NOT_CONNECTED = False
 
-        # Fetch the Activity ID from the task:
-        # task = self.maestro.get_task(execution.task_id)
-        # activity_id = task.activity_id
-
-        # Opens the BotCity website.
-        # self.browse("http://www.botcity.dev")
-
-        # Uncomment to mark this task as finished on BotMaestro
-        # self.maestro.finish_task(
-        #     task_id=execution.task_id,
-        #     status=AutomationTaskFinishStatus.SUCCESS,
-        #     message="Task Finished OK."
-        # )
-        
         # Login no Steam
         self.execute(r'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Steam\Steam.lnk')
         if not self.find( "FLD_Senha", matching=0.97, waiting_time=20000):
@@ -54,45 +37,30 @@ class Bot(DesktopBot):
         self.click_relative(146, 42)
         self.paste(senha)
         self.enter()
-        print('\n>>> Inserido Senha e clique em Login com Sucesso!\n')
+        print('\n>>> Inserido Senha e clique em Login!\n')
         
-        # # Aguarda carregamento 
-        if not self.find( "IMG_SteamLogin", matching=0.97, waiting_time=20000):
-            self.not_found("IMG_SteamLogin")
-        print('Carregamento feito com sucesso!')
-        
-        # # Fecha o modal
-        # if not self.find( "BTN_CloseModal", matching=0.97, waiting_time=20000):
-        #     self.not_found("BTN_CloseModal")
-        # self.click()
-        # print('Modal fechado com sucesso!')
+        # Valida Login
+        self.wait(5000)
+        if not self.find( "TXT_UsuarioLogado", matching=0.97, waiting_time=30000):
+            self.not_found("TXT_UsuarioLogado")
+        print('>>> Login feito com Sucesso!\n')
         
         # Desloga do Steam
-        if not self.find( "BTN_Account", matching=0.97, waiting_time=30000):
+        self.wait(5000)
+        if not self.find( "BTN_Account", matching=0.97, waiting_time=10000):
             self.not_found("BTN_Account")
         self.click()
-        print('>>> Carregamento realizado!\n')
+        print('>>> Carregamento Realizado!\n')
+        self.wait(5000)
         if not self.find( "BTN_CloseSession", matching=0.97, waiting_time=10000):
             self.not_found("BTN_CloseSession")
         self.click()
+        self.wait(5000)
         if not self.find( "BTN_ClickEndSession", matching=0.97, waiting_time=10000):
             self.not_found("BTN_ClickEndSession")
         self.click()
         print('>>> Finalizado sessao com Sucesso!\n')
-        
-        # Aguarda ícone da Steam ser visivel novamente
-        # self.wait(20000)
-        # if not self.find( "BTN_IconSteam", matching=0.97, waiting_time=10000):
-        #     self.not_found("BTN_IconSteam")
-        # self.click()
-        # print('>>> Steam deve abrir novamente?\n')
-        
-        # Abre tela de Login e clica em fechar
-        # self.wait(50000)
-        # if not self.find( "BTN_CloseLogin", matching=0.97, waiting_time=10000):
-        #     self.not_found("BTN_CloseLogin")
-        # self.click()
-        # print('>>> Steam é fechado\n')
+
          
     def not_found(self, label): 
         print(f"Element not found: {label}")
